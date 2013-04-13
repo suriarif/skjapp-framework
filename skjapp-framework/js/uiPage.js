@@ -65,7 +65,7 @@ var delete_ui_page = function deleteUIPage(page)
 	alert('deleteUIPage') ;
 } ;
 
-engine['ui.page'] = 
+framework['ui.page'] = 
 {
 	'createPage'	: create_ui_page 	,
 	'getPage'		: get_ui_page		,
@@ -198,7 +198,7 @@ var delete_ui_page_advanced = function deleteUIPageAdvanced(page)
 	alert('deleteUIPageAdvanced') ;
 } ;
 
-engine['ui.page.advanced'] = 
+framework['ui.page.advanced'] = 
 {
 	'createPage'	: create_ui_page_advanced 	,
 	'getPage'		: get_ui_page_advanced		,

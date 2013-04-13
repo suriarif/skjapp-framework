@@ -2,11 +2,6 @@
 
 var data = 
 {
-	'engine' :
-	{
-		'app' : 'app'
-	},
-	
 	'app':
 	{
 		'viewportWidth' : 768,		// Width

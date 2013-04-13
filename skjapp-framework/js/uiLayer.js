@@ -29,7 +29,7 @@ var delete_ui_layer_advanced_custom = function deleteUILayerAdvancedCustom(layer
 } ;
 
 
-data['engine']['ui.layer.advanced.custom'] = 
+framework['ui.layer.advanced.custom'] = 
 {
 	'createLayer'	: create_ui_layer_advanced_custom 	,
 	'getLayer'		: get_ui_layer_advanced_custom		,
@@ -95,7 +95,7 @@ var delete_ui_layer_advanced_group = function deleteUILayerAdvancedGroup(layer)
 	
 } ;
 
-data['engine']['ui.layer.advanced.group'] = 
+framework['ui.layer.advanced.group'] = 
 {
 	'createLayer'	: create_ui_layer_advanced_group 	,
 	'getLayer'		: get_ui_layer_advanced_group		,
@@ -164,7 +164,7 @@ var delete_ui_layer_audio = function deleteUILayerAudio(layer)
 	
 } ;
 
-data['engine']['ui.layer.audio'] = 
+framework['ui.layer.audio'] = 
 {
 	'createLayer'	: create_ui_layer_audio 	,
 	'getLayer'		: get_ui_layer_audio		,
@@ -204,7 +204,7 @@ var draw_ui_layer_html_div = function drawUILayerHTMLDIV(layer)
 	
 }
 
-data['engine']['ui.layer.html.div'] = 
+framework['ui.layer.html.div'] = 
 {
 	'createLayer' : create_ui_layer_html_div ,
 	'getLayer'	  : get_ui_layer_html_div	 ,
@@ -240,7 +240,7 @@ var draw_ui_layer_html_button = function drawUILayerHTMLButton(layer)
 	
 }
 
-data['engine']['ui.layer.html.button'] = 
+framework['ui.layer.html.button'] = 
 {
 	'createLayer' : create_ui_layer_html_button ,
 	'getLayer'	  : get_ui_layer_html_button	,
@@ -276,7 +276,7 @@ var draw_ui_layer_html_textbox = function drawUILayerHTMLTextBox(layer)
 	
 }
 
-data['engine']['ui.layer.html.textbox'] = 
+framework['ui.layer.html.textbox'] = 
 {
 	'createLayer' : create_ui_layer_html_textbox ,
 	'getLayer'	  : get_ui_layer_html_textbox	,
@@ -359,7 +359,7 @@ var delete_ui_layer_text = function deleteUILayerText()
 }
 
 
-data['engine']['ui.layer.text'] = 
+framework['ui.layer.text'] = 
 {
 	'createLayer'	: create_ui_layer_text 	,
 	'getLayer'		: get_ui_layer_text		,
@@ -470,7 +470,7 @@ var delete_ui_layer_text_css = function deleteUILayerTextCSS()
 }
 
 
-data['engine']['ui.layer.text.html'] = 
+framework['ui.layer.text.html'] = 
 {
 	'createLayer'	: create_ui_layer_text_css 	,
 	'getLayer'	 	: get_ui_layer_text_css		,
@@ -521,7 +521,7 @@ var delete_ui_layer_shape_line = function deleteUILayerShapeLine()
 }
 
 
-data['engine']['ui.layer.shape.line'] = 
+framework['ui.layer.shape.line'] = 
 {
 	'createLayer'	: create_ui_layer_shape_line 	,
 	'getLayer'		: get_ui_layer_shape_line		,
@@ -568,7 +568,7 @@ var delete_ui_layer_shape_rectangle = function deleteUILayerShapeRectangle()
 }
 
 
-data['engine']['ui.layer.shape.rectangle'] = 
+framework['ui.layer.shape.rectangle'] = 
 {
 	'createLayer'	: create_ui_layer_shape_rectangle 	,
 	'getLayer'		: get_ui_layer_shape_rectangle		,
@@ -619,7 +619,7 @@ var delete_ui_layer_shape_line = function deleteUILayerShapeLine()
 }
 
 
-data['engine']['ui.layer.shape.line'] = 
+framework['ui.layer.shape.line'] = 
 {
 	'createLayer'	: create_ui_layer_shape_line 	,
 	'getLayer'		: get_ui_layer_shape_line		,
@@ -666,7 +666,7 @@ var delete_ui_layer_shape_rectangle = function deleteUILayerShapeRectangle()
 }
 
 
-data['engine']['ui.layer.shape.rectangle'] = 
+framework['ui.layer.shape.rectangle'] = 
 {
 	'createLayer'	: create_ui_layer_shape_rectangle 	,
 	'getLayer'		: get_ui_layer_shape_rectangle		,
@@ -764,7 +764,7 @@ var delete_ui_layer_image = function deleteUILayerImage()
 }
 
 
-data['engine']['ui.layer.image'] = 
+framework['ui.layer.image'] = 
 {
 	'createLayer'	: create_ui_layer_image 	,
 	'getLayer'		: get_ui_layer_image		,
@@ -842,7 +842,7 @@ var delete_ui_layer_image_frame = function deleteUILayerImageFrame()
 }
 
 
-data['engine']['ui.layer.image.frame'] = 
+framework['ui.layer.image.frame'] = 
 {
 	'createLayer'	: create_ui_layer_image_frame 	,
 	'getLayer'		: get_ui_layer_image_frame		,
@@ -982,7 +982,7 @@ var delete_ui_layer_image_animation = function deleteUILayerImageAnimation()
 } ;
 
 
-data['engine']['ui.layer.image.animation'] = 
+framework['ui.layer.image.animation'] = 
 {
 	'createLayer'	: create_ui_layer_image_animation 	,
 	'getLayer'		: get_ui_layer_image_animation		,
@@ -1173,7 +1173,7 @@ var delete_ui_layer_image_animation_array = function deleteUILayerImageAnimation
 	alert('deleteUILayerImageAnimation') ;
 }
 
-data['engine']['ui.layer.image.animation.array'] = 
+framework['ui.layer.image.animation.array'] = 
 {
 	'createLayer'	: create_ui_layer_image_animation_array 	,
 	'getLayer'		: get_ui_layer_image_animation_array		,
@@ -1244,7 +1244,7 @@ var delete_ui_layer_shape_line = function deleteUILayerShapeLine()
 }
 
 
-data['engine']['ui.layer.shape.line'] = 
+framework['ui.layer.shape.line'] = 
 {
 	'createLayer'	: create_ui_layer_shape_line 	,
 	'getLayer'		: get_ui_layer_shape_line		,
@@ -1659,7 +1659,7 @@ var delete_ui_layer_shape_rectangle = function deleteUILayerShapeRectangle()
 	
 }
 
-data['engine']['ui.layer.shape.rectangle'] = 
+framework['ui.layer.shape.rectangle'] = 
 {
 	'createLayer'	: create_ui_layer_shape_rectangle 	,
 	'getLayer'		: get_ui_layer_shape_rectangle		,
@@ -1704,7 +1704,7 @@ var delete_ui_layer_shape_square = function deleteUILayerShapeSquare()
 	
 }
 
-data['engine']['ui.layer.shape.square'] = 
+framework['ui.layer.shape.square'] = 
 {
 	'createLayer'	: create_ui_layer_shape_square 	,
 	'getLayer'		: get_ui_layer_shape_square		,
@@ -1767,7 +1767,7 @@ var delete_ui_layer_shape_roundedRect = function deleteUILayerShapeRoundedRect()
 	
 }
 
-data['engine']['ui.layer.shape.roundedRect'] = 
+framework['ui.layer.shape.roundedRect'] = 
 {
 	'createLayer'	: create_ui_layer_shape_roundedRect ,
 	'getLayer'		: get_ui_layer_shape_roundedRect	,
@@ -1824,7 +1824,7 @@ var delete_ui_layer_shape_triangle = function deleteUILayerShapeTriangle()
 	
 }
 
-data['engine']['ui.layer.shape.triangle'] = 
+framework['ui.layer.shape.triangle'] = 
 {
 	'createLayer'	: create_ui_layer_shape_triangle 	,
 	'getLayer'		: get_ui_layer_shape_triangle		,
@@ -1879,7 +1879,7 @@ var delete_ui_layer_shape_polygon = function deleteUILayerShapePolygon()
 	
 }
 
-data['engine']['ui.layer.shape.polygon'] = 
+framework['ui.layer.shape.polygon'] = 
 {
 	'createLayer'	: create_ui_layer_shape_polygon	,
 	'getLayer'		: get_ui_layer_shape_polygon	,
@@ -1932,7 +1932,7 @@ var delete_ui_layer_shape_arc = function deleteUILayerShapeArc()
 	
 }
 
-data['engine']['ui.layer.shape.arc'] = 
+framework['ui.layer.shape.arc'] = 
 {
 	'createLayer'	: create_ui_layer_shape_arc	,
 	'getLayer'		: get_ui_layer_shape_arc	,
@@ -1986,7 +1986,7 @@ var delete_ui_layer_shape_ellipticalArc = function deleteUILayerShapeArc()
 	
 }
 
-data['engine']['ui.layer.shape.ellipticalArc'] = 
+framework['ui.layer.shape.ellipticalArc'] = 
 {
 	'createLayer'	: create_ui_layer_shape_ellipticalArc	,
 	'getLayer'		: get_ui_layer_shape_ellipticalArc		,
@@ -2034,7 +2034,7 @@ var delete_ui_layer_shape_circle = function deleteUILayerShapeCircle()
 	
 }
 
-data['engine']['ui.layer.shape.circle'] = 
+framework['ui.layer.shape.circle'] = 
 {
 	'createLayer'	: create_ui_layer_shape_circle 	,
 	'getLayer'		: get_ui_layer_shape_circle 		,
@@ -2089,7 +2089,7 @@ var delete_ui_layer_shape_ellipse = function deleteUILayerShapeEllipse()
 	
 }
 
-data['engine']['ui.layer.shape.ellipse '] = 
+framework['ui.layer.shape.ellipse '] = 
 {
 	'createLayer'	: create_ui_layer_shape_ellipse 	,
 	'getLayer'		: get_ui_layer_shape_ellipse 		,
@@ -2140,7 +2140,7 @@ var delete_ui_layer_shape_quadraticCurve = function deleteUILayerShapeEllipse()
 	
 }
 
-data['engine']['ui.layer.shape.quadraticCurve'] = 
+framework['ui.layer.shape.quadraticCurve'] = 
 {
 	'createLayer'	: create_ui_layer_shape_quadraticCurve	,
 	'getLayer'		: get_ui_layer_shape_quadraticCurve		,
@@ -2195,7 +2195,7 @@ var delete_ui_layer_shape_bezierCurve = function deleteUILayerShapeBezierCurve()
 	
 }
 
-data['engine']['ui.layer.shape.bezierCurve'] = 
+framework['ui.layer.shape.bezierCurve'] = 
 {
 	'createLayer'	: create_ui_layer_shape_bezierCurve	,
 	'getLayer'		: get_ui_layer_shape_bezierCurve		,
@@ -2241,7 +2241,7 @@ var delete_ui_layer_shape_path = function deleteUILayerShapePath()
 	
 }
 
-data['engine']['ui.layer.shape.path'] = 
+framework['ui.layer.shape.path'] = 
 {
 	'createLayer'	: create_ui_layer_shape_path	,
 	'getLayer'		: get_ui_layer_shape_path		,
