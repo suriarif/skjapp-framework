@@ -4,14 +4,7 @@ var data =
 {
 	'engine' :
 	{
-		'app' : 'app',
-		
-		'pluginfiles' : 
-		[
-			'skjapp-framework/js/ui/layers/uiLayer.js',
-			'skjapp-framework/js/ui/pages/uiPage.js',
-			'skjapp-framework/js/ui/layers/deviceBlackBerry10.js'
-		]
+		'app' : 'app'
 	},
 	
 	'app':
@@ -22,7 +15,7 @@ var data =
 		
 		'type' : 'app',
 		
-		'name' : 'YOUR APP NAME',
+		'name' : 'framework-0.2.2',
 		
 		'x'			: 0,
 		'y'			: 0,
@@ -68,7 +61,7 @@ var data =
 		
 		'visible': true,
 		
-		'src'	: 'images/SKJ.png',
+		'src'	: 'assets/images/SKJ.png',
 		
 		'drag' : true,
 		

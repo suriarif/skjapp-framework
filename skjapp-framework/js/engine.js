@@ -74,10 +74,26 @@ var pages ;
 
 /////////////////////////
 /////  ENGINE CODE	/////
-/////////////////////////	
+/////////////////////////
+
+// Loading framework.js
+var frameworkScript	= document.createElement('script') ;
+frameworkScript.setAttribute('type','text/javascript') ;
+frameworkScript.setAttribute('src' ,'skjapp-framework/js/framework.js') ;
+
+frameworkScript.onload = createEngine ;
+document.getElementsByTagName('head')[0].appendChild(frameworkScript) ;
+
+// Loading style.css
+var styleCSS	= document.createElement('link') ;
+styleCSS.setAttribute('href','skjapp-framework/css/style.css') ;
+styleCSS.setAttribute('type','text/css') ;
+styleCSS.setAttribute('rel','stylesheet') ;
+
+document.getElementsByTagName('head')[0].appendChild(styleCSS) ;
 
 function createEngine()
-{	
+{
 	app = 'app' ;
 	
 	var title	= document.createElement('title') ;
@@ -89,14 +105,8 @@ function createEngine()
 	viewport.setAttribute("id","viewport") ;
 	viewport.setAttribute("content","width=" + data[app]["viewportWidth"] + ", height=" + data[app]["viewportHeight"] + ", user-scalable=" + data[app]["viewportResize"] + "") ;
 	document.getElementsByTagName('head')[0].appendChild(viewport) ;
-	
-	// NO NEED - Kamal
-	/*var defaultCSS	= document.createElement('style') ;
-	defaultCSS.innerHTML = 'canvas { margin-left : -8px ; margin-top : -8px ;}' ;
-	
-	document.head.appendChild(defaultCSS) ;*/
 
-	var scriptFiles = data['engine']['pluginfiles'] ;
+	var scriptFiles = framework['coreFiles'] ;
 	totalScripts = scriptFiles.length ;
 	
 	for(var i = 0; i < totalScripts; i++)
