@@ -10,7 +10,6 @@ var KEY_DOWN	= 40 ;
 var KEY_LEFT	= 37 ;
 var KEY_RIGHT	= 39 ;
 
-
 /////////////////////////
 ////GLOBAL VARIABLES/////
 /////////////////////////
@@ -35,8 +34,11 @@ var engine =
 	'touchLayer'	: undefined,
 	'touchLayerPart': undefined,
 	
-	'resourcesLoaded' : false
+	'resourcesLoaded' : false,
+	'drag' : false
 } ;
+
+var drag = {} ;
 
 var consoleDiv ;
 var canvasDiv ;
@@ -78,15 +80,15 @@ function createEngine()
 {	
 	app = 'app' ;
 	
-	/*var title	= document.createElement('title') ;
+	var title	= document.createElement('title') ;
 	title.innerHTML = data['app']['name'] ;
-	document.head.appendChild(title) ;*/
+	document.head.appendChild(title) ;
 	
 	var viewport = document.createElement('meta') ;
 	viewport.setAttribute("name","viewport") ;
 	viewport.setAttribute("id","viewport") ;
 	viewport.setAttribute("content","width=" + data[app]["viewportWidth"] + ", height=" + data[app]["viewportHeight"] + ", user-scalable=" + data[app]["viewportResize"] + "") ;
-	document.getElementsByTagName('head')[0].appendChild(viewport);
+	document.getElementsByTagName('head')[0].appendChild(viewport) ;
 	
 	// NO NEED - Kamal
 	/*var defaultCSS	= document.createElement('style') ;
@@ -201,7 +203,7 @@ function createApp()
 	
 	// Creating default Canvas
 	canvas		= document.createElement('canvas') ;
-	//alert("create app2") ;
+	
 	canvas.setAttribute("id", "canvas1") ;
 	canvas.setAttribute("width", appWidth) ;
 	canvas.setAttribute("height", appHeight) ;
@@ -223,9 +225,15 @@ function createApp()
 	ctxEvent.ontouchstart 	= touchStart ;			// touchstart
 	ctxEvent.ontouchmove 	= touchMove ;			// touchmove
 	ctxEvent.ontouchend 	= touchEnd ;			// touchend
-	ctxEvent.ontouchenter 	= touchEnter ;			// touchenter
-	ctxEvent.ontouchleave 	= touchLeave ;			// touchleave
-	ctxEvent.ontouchcancel 	= touchCancel ;			// touchcancel
+    
+    /*
+    window.onclick		= mouseClick ;
+	window.ondblclick	= mouseDblClick ;
+	window.onmousedown	= mouseDown ;
+	window.onmouseup	= mouseUp ;
+	window.onmousemove	= mouseMove ;
+	window.onmouseover	= mouseOver ;
+	window.onmouseout	= mouseOut ;*/
     
 	// Setting Default Stroke Style and Fill Style as Black Color
 	ctx.strokeStyle = '#000000' ;
@@ -581,7 +589,6 @@ function getTouchLayer(xx, yy)
 	{	
 		//consoleDiv.innerHTML = consoleDiv.innerHTML + '</br>' + appCurrentPageLayers[i] ;
 		//alert('a ' + appCurrentPageLayers[i]) ;
-		
 		var visible	= data[appCurrentPageLayers[i]]['visible'] ;
 		
 		var x		= data[appCurrentPageLayers[i]]['x'] ;
@@ -591,6 +598,26 @@ function getTouchLayer(xx, yy)
 		
 		if(visible == true && x < xx && x + width > xx && y < yy && y + height > yy)
 		{
+			drag = 
+			{
+				'midpoint' : {} ,
+				'data' : data[appCurrentPageLayers[i]] , 
+				'currentIndex' : i , 
+				'layer' : appCurrentPageLayers[i]
+			} ;
+			
+			if(data[appCurrentPageLayers[i]]["drag"] == false || data[appCurrentPageLayers[i]]["drag"] == undefined)
+			{
+				drag["mode"] = false ;
+			}
+			else
+			{
+				drag["mode"] = true ;
+			}
+			
+			drag['midpoint']['x1'] = xx - drag['data']['x'] ;
+	    	drag['midpoint']['y1'] = yy - drag['data']['y'] ;
+			
 			engine['touchLayer'] = appCurrentPageLayers[i] ;
 			
 			var layerType = data[engine['touchLayer']]['type'] ;
@@ -694,6 +721,10 @@ function mouseDown(e)
 
 function mouseUp(e)
 {
+	drag["mode"] = false ;
+	
+	//alert(JSON.stringify(data['rect2'], undefined, 3)) ;
+	
 	// Clearing mouseDown values
 	engine['mouseDown']['active']	= false ;
 	
@@ -728,6 +759,12 @@ function mouseUp(e)
 
 function mouseMove(e)
 {
+	if(drag["mode"] == true)
+	{
+		drag['data']['x'] = e.pageX - drag['midpoint']['x1'] ;
+	  	drag['data']['y'] = e.pageY - drag['midpoint']['y1'] ;
+	}
+	
 	engine['mouseMove']['active']	= true ;
 	
 	engine['mouseMove']['screenX']	= e.screenX ;
@@ -860,17 +897,26 @@ function touchStart(event)
 	
 	engine["gesture"]["tap"] = data ;
 	
+	getTouchLayer(event.touches[0].pageX, event.touches[0].pageY) ;
 	
+	event.preventDefault();
 }
 
 function touchEnd(e)
 {
-	//alert(JSON.stringify(engine["gesture"], undefined, 3)) ;
+	drag["mode"] = false ;
 }
 
 function touchMove(e)
 {
-	//alert(JSON.stringify(engine["gesture"]["tap"], undefined, 3)) ;
+	if(drag["mode"] == true)
+	{
+		var x = e.touches[0].pageX ;
+		var y = e.touches[0].pageY ;
+		
+		drag['data']['x'] = x - drag['midpoint']['x1'] ;
+	  	drag['data']['y'] = y - drag['midpoint']['y1'] ;
+	}
 }
 
 function touchEnter(e)
@@ -885,6 +931,7 @@ function touchLeave(e)
 
 function touchCancel(e)
 {
+	alert("touch start") ;
 }
 
 // GESTURE INPUT CODE

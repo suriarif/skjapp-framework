@@ -1,0 +1,14 @@
+body
+{
+	margin : 0px ;
+	padding : 0px ;
+}
+
+.console
+{
+	position: absolute ;
+	left : 20px ;
+	top : 900px ;
+	font-family: arial ;
+	font-size: 25px ;
+}
