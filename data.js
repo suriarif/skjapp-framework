@@ -2,119 +2,113 @@
 
 var data = 
 {
-	'app':
+	'app' : 
 	{
-		'viewportWidth' : 768,		// Width
-		'viewportHeight' : 1280,	// Height
-		'viewportResize' : "no",	// Disable Zoom In and Zoom Out
-		
+		'viewportWidth' : 768, // Width
+		'viewportHeight' : 1280, // Height
+		'viewportResize' : "no", // Disable Zoom In and Zoom Out
+
 		'type' : 'app',
-		
+
 		'name' : 'framework-0.2.2',
-		
-		'x'			: 0,
-		'y'			: 0,
-		'width'		: 768,
-		'height'	: 1280,
-		
-		'maxFrameRate'	: 60,
-		
-		'pages'			: ['loading_page'],
-		'currentPage'	: 'loading_page'
-	},
-	
-	'loading_page' :
-	{
-		'type'		: 'ui.page',
-		
-		'layers'	: ['BlackBackground','bb10','Logo','rect1','rect2']
-	},
-	
-	'bb10' :
-	{
-		'type' : 'device.blackberry10',
-		'scrolling' : false
-	},
-	
-	'BlackBackground' :
-	{
-		'type'	: 'ui.layer.shape.rectangle',
-		
-		'visible': true,
-		
-		'x'		: 0,
-		'y'		: 0,
-		'width'	: 450,
-		'height': 750,
-		'fill'	: true,
-		'color'	: '#000',
+
+		'x' : 0,
+		'y' : 0,
+		'width' : 768,
+		'height' : 1280,
+
+		'maxFrameRate' : 60,
+
+		'pages' : ['loading_page'],
+		'currentPage' : 'loading_page'
 	},
 
-	'Logo'	:
+	'loading_page' : 
 	{
-		'type'	: 'ui.layer.image',
-		
-		'visible': true,
-		
-		'src'	: 'assets/images/SKJ.png',
-		
-		'drag' : true,
-		
-		'x'		: 270,
-		'y'		: 410
+		'type' : 'ui.page',
+
+		'layers' : ['BlackBackground', 'Logo', 'rect1', 'rect2', 'rect3']
 	},
-	
-	'rect1' :
+
+	'BlackBackground' : 
 	{
-		'type' 	: 'ui.layer.shape.rectangle',
-		
-		'x'		: 50,
-		'y'		: 50,
-		'width' : 100,
-		'height': 100,
-		
+		'type' : 'ui.layer.shape.rectangle',
+
+		'visible' : true,
+
+		'x' : 0,
+		'y' : 0,
+		'width' : 450,
+		'height' : 750,
 		'fill' : true,
-		
+		'color' : '#000',
+	},
+
+	'Logo' : 
+	{
+		'type' : 'ui.layer.image',
+
+		'visible' : true,
+
+		'src' : 'assets/images/SKJ.png',
+
+		'drag' : true,
+
+		'x' : 270,
+		'y' : 410
+	},
+
+	'rect1' : 
+	{
+		'type' : 'ui.layer.shape.rectangle',
+
+		'x' : 50,
+		'y' : 50,
+		'width' : 100,
+		'height' : 100,
+
+		'fill' : true,
+
 		'color' : "#f2f2f2",
 		'visible' : true
 	},
-	
-	'rect2' :
+
+	'rect2' : 
 	{
-		'type' 	: 'ui.layer.shape.rectangle',
-		
-		'x'		: 300,
-		'y'		: 100,
+		'type' : 'ui.layer.shape.rectangle',
+
+		'x' : 300,
+		'y' : 100,
 		'width' : 100,
-		'height': 100,
-		
+		'height' : 100,
+
 		'fill' : true,
-		
+
 		'drag' : true,
-		
+
 		'color' : "#fff",
-		
+
 		'visible' : true
 	},
-	
-	'rect3' :
+
+	'rect3' : 
 	{
-		'type' 	: 'ui.layer.shape.rectangle',
-		
-		'x'		: 450,
-		'y'		: 150,
+		'type' : 'ui.layer.shape.rectangle',
+
+		'x' : 450,
+		'y' : 150,
 		'width' : 100,
 		'height' : 300,
-		
+
 		'fill' : true,
-		
-		'rotate' : 0,
-		'rotateX': 50,
-		'rotateY': 50,
-		
+
+		'rotate' : 35,
+		'rotateX' : 50,
+		'rotateY' : 50,
+
 		'color' : "#ff8f7d",
-		
+
 		'effect' : 'slideIn',
-		'visible': true
+		'visible' : true
 	},
 }

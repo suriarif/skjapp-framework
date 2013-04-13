@@ -14,30 +14,6 @@ var KEY_RIGHT	= 39 ;
 ////GLOBAL VARIABLES/////
 /////////////////////////
 
-// Engine
-var engine = 
-{
-	'mouseClick'	: [] ,
-	'mouseDblClick'	: [] ,
-	'mouseDown'		: [] ,
-	'mouseUp'		: [] ,
-	'mouseMove'		: [] ,
-	'mouseOver'		: [] ,
-	'mouseOut'		: [] ,
-	
-	'gesture'  		: {} ,				// Gesture
-	
-	'keyDown'		: [] ,
-	'keyPress'		: [] ,
-	'keyUp'			: [] , 
-	
-	'touchLayer'	: undefined,
-	'touchLayerPart': undefined,
-	
-	'resourcesLoaded' : false,
-	'drag' : false
-} ;
-
 var drag = {} ;
 
 var consoleDiv ;
@@ -443,7 +419,7 @@ function getPage(page, state)
 function updatePage(page)
 {	
 	var type = data[page]['type'] ;
-
+	
 	framework[type]['updatePage'](page) ;
 }
 

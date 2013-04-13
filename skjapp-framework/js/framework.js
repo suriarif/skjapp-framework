@@ -30,8 +30,24 @@ var framework =
 	'touchLayer'	: undefined,
 	'touchLayerPart': undefined,
 	
+	'touchStart'	: [] ,
+	'touchMove'		: [] ,
+	'touchEnd'		: [] ,
+	'touchEnter'	: [] ,
+	'touchLeave'	: [] ,
+	'touchCancel'	: [] ,
+	
 	// Gestures
-	'gesture'  		: {} ,				// Gesture 
+	'gesture'  		: {} ,
+	'tap'			: [] ,
+	'doubleTap'		: [] ,
+	'longPress'		: [] ,
+	'flick'			: [] ,
+	'swipe'			: [] ,
+	'drag'			: [] ,
+	'pinchOpen'		: [] ,
+	'pinchClose'	: [] ,
+	'rotation'		: [] ,
 
 	'resourcesLoaded' : false,
 	'drag' : false

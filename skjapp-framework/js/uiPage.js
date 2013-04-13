@@ -36,9 +36,12 @@ var get_ui_page = function getUIPage(page)
 
 var update_ui_page = function updateUIPage(page)
 {
-	code[page]['update']() ;
+	if(code[page] != undefined && code[page]['update'] != undefined)
+	{
+		code[page]['update']() ;
+	}
 	
-	// Getting Layers and drawing them
+	// Getting Layers and updating them
 	var layers = data[page]['layers'] ;
 
 	for(var i = 0; i < layers.length;i++)
@@ -129,8 +132,11 @@ var get_ui_page_advanced = function getUIPageAdvanced(page)
 } ;
 
 var update_ui_page_advanced = function updateUIPageAdvanced(page)
-{			
-	code[page]['update']() ;
+{
+	if(code[page] != undefined && code[page]['update'] != undefined)
+	{		
+		code[page]['update']() ;
+	}
 	
 	var state = data[page]['state'] ;
 	
