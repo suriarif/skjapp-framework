@@ -2,113 +2,123 @@
 
 var data = 
 {
-	'app' : 
+	'engine' :
 	{
-		'viewportWidth' : 768, // Width
-		'viewportHeight' : 1280, // Height
-		'viewportResize' : "no", // Disable Zoom In and Zoom Out
-
+		'app' : 'app',
+		
+		'pluginfiles' : 
+		[
+			'skjapp-framework/js/ui/layers/uiLayerImage.js',
+			'skjapp-framework/js/ui/layers/uiLayerShape.js',
+			'skjapp-framework/js/ui/layers/uiLayerText.js',
+			'skjapp-framework/js/ui/layers/uiLayerAdvanced.js',
+			'skjapp-framework/js/ui/pages/uiPage.js',
+			'skjapp-framework/js/ui/layers/uiLayerAudio.js',
+			'skjapp-framework/js/ui/layers/uiLayerHTMLControls.js',
+			'skjapp-framework/js/ui/layers/deviceBlackBerry10.js'
+		]
+	},
+	
+	'app':
+	{
+		'viewportWidth' : 768,		// Width
+		'viewportHeight' : 1280,	// Height
+		'viewportResize' : "no",	// Disable Zoom In and Zoom Out
+		
 		'type' : 'app',
-
-		'name' : 'framework-0.2.2',
-
-		'x' : 0,
-		'y' : 0,
-		'width' : 768,
-		'height' : 1280,
-
-		'maxFrameRate' : 60,
-
-		'pages' : ['loading_page'],
-		'currentPage' : 'loading_page'
+		
+		'name' : 'YOUR APP NAME',
+		
+		'x'			: 0,
+		'y'			: 0,
+		'width'		: 768,
+		'height'	: 1280,
+		
+		'maxFrameRate'	: 60,
+		
+		'pages'			: ['loading_page'],
+		'currentPage'	: 'loading_page'
+	},
+	
+	'loading_page' :
+	{
+		'type'		: 'ui.page',
+		
+		'layers'	: ['BlackBackground','rect1','rect2']
+	},
+	
+	'BlackBackground' :
+	{
+		'type'	: 'ui.layer.shape.rectangle',
+		
+		'visible': true,
+		
+		'x'		: 0,
+		'y'		: 0,
+		'width'	: 450,
+		'height': 750,
+		'fill'	: true,
+		'color'	: '#000',
 	},
 
-	'loading_page' : 
+	'Logo'	:
 	{
-		'type' : 'ui.page',
-
-		'layers' : ['BlackBackground', 'Logo', 'rect1', 'rect2', 'rect3']
-	},
-
-	'BlackBackground' : 
-	{
-		'type' : 'ui.layer.shape.rectangle',
-
-		'visible' : true,
-
-		'x' : 0,
-		'y' : 0,
-		'width' : 450,
-		'height' : 750,
-		'fill' : true,
-		'color' : '#000',
-	},
-
-	'Logo' : 
-	{
-		'type' : 'ui.layer.image',
-
-		'visible' : true,
-
-		'src' : 'assets/images/SKJ.png',
-
+		'type'	: 'ui.layer.image',
+		
+		'visible': true,
+		
+		'src'	: 'images/SKJ.png',
+		
 		'drag' : true,
-
-		'x' : 270,
-		'y' : 410
+		
+		'x'		: 270,
+		'y'		: 410
 	},
-
-	'rect1' : 
+	
+	'rect1' :
 	{
-		'type' : 'ui.layer.shape.rectangle',
-
-		'x' : 50,
-		'y' : 50,
+		'type' 	: 'ui.layer.shape.rectangle',
+		
+		'x'		: 50,
+		'y'		: 50,
 		'width' : 100,
-		'height' : 100,
-
+		'height': 100,
+		
+		'drag' : true,
+		
 		'fill' : true,
-
+		
 		'color' : "#f2f2f2",
 		'visible' : true
 	},
-
-	'rect2' : 
+	
+	'rect2' :
 	{
-		'type' : 'ui.layer.shape.rectangle',
-
-		'x' : 300,
-		'y' : 100,
+		'type' 	: 'ui.layer.shape.rectangle',
+		
+		'x'		: 300,
+		'y'		: 100,
 		'width' : 100,
-		'height' : 100,
-
+		'height': 100,
+		
 		'fill' : true,
-
-		'drag' : true,
-
 		'color' : "#fff",
-
 		'visible' : true
 	},
-
-	'rect3' : 
+	
+	'rect3' :
 	{
-		'type' : 'ui.layer.shape.rectangle',
-
-		'x' : 450,
-		'y' : 150,
+		'type' 	: 'ui.layer.shape.rectangle',
+		
+		'x'		: 450,
+		'y'		: 150,
 		'width' : 100,
 		'height' : 300,
-
+		
 		'fill' : true,
-
-		'rotate' : 35,
-		'rotateX' : 50,
-		'rotateY' : 50,
-
 		'color' : "#ff8f7d",
-
+		
 		'effect' : 'slideIn',
-		'visible' : true
+		'visible': true
 	},
 }

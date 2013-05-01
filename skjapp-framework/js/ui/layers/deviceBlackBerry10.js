@@ -33,7 +33,7 @@ var delete_device_blackberry10 = function deleteDeviceBlackBerry10(layer)
 	
 } ;
 
-framework['device.blackberry10'] = 
+data['engine']['device.blackberry10'] = 
 {
 	'createLayer'	: create_device_blackberry10 	,
 	'getLayer'		: get_device_blackberry10		,

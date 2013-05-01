@@ -14,7 +14,44 @@ var KEY_RIGHT	= 39 ;
 ////GLOBAL VARIABLES/////
 /////////////////////////
 
+// Engine
+var engine = 
+{
+	'mouseClick'	: [] ,
+	'mouseDblClick'	: [] ,
+	'mouseDown'		: [] ,
+	'mouseUp'		: [] ,
+	'mouseMove'		: [] ,
+	'mouseOver'		: [] ,
+	'mouseOut'		: [] ,
+	
+	'gesture'  		: {"swipe" : []} ,				// Gesture
+	
+	'keyDown'		: [] ,
+	'keyPress'		: [] ,
+	'keyUp'			: [] , 
+	
+	'touchLayer'	: undefined,
+	'touchLayerPart': undefined,
+	
+	'resourcesLoaded' : false,
+	'drag' : false
+} ;
+
+engine["gesture"]["swipe"]["active"] = false ;
+
 var drag = {} ;
+var gesture = {
+	"touch" :
+	{
+		"touchX" : ""
+	},
+	"gesture" : 
+	{
+		
+	}
+} ; 
+// swipe : {direction : "", "angle" : ""} ;
 
 var consoleDiv ;
 var canvasDiv ;
@@ -50,26 +87,50 @@ var pages ;
 
 /////////////////////////
 /////  ENGINE CODE	/////
-/////////////////////////
+/////////////////////////	
 
-// Loading framework.js
-var frameworkScript	= document.createElement('script') ;
-frameworkScript.setAttribute('type','text/javascript') ;
-frameworkScript.setAttribute('src' ,'skjapp-framework/js/framework.js') ;
+function playVideo(x, y, src, loop)
+{
+	if(!document.getElementById("videoContainer"))
+	{
+		var videoContainer = document.createElement("div") ;
+		videoContainer.setAttribute("id" , "videoContainer") ;
+		videoContainer.setAttribute("style" , "position : absolute; left : " + x + "px; top : " + y + "px;") ;
+		
+		var video	= document.createElement('video') ;
+	
+		video.setAttribute("autoplay" , "") ;
+		video.setAttribute("loop" , "auto") ;
+		//video.setAttribute("style" , "position : absolute; left : " + x + "px; top : 300px;") ;
+		
+		var source	= document.createElement('source') ;
+		source.setAttribute('src', src) ;
+		
+		source.setAttribute('type', 'video/mp4') ;
+		
+		if(loop == true)
+		{
+			video.setAttribute('preload' ,"auto") ;
+		}
+		
+		video.appendChild(source) ;
+		
+		videoContainer.appendChild(video) ;
+		
+		canvasDiv.appendChild(videoContainer) ; 
+	}
+}
 
-frameworkScript.onload = createEngine ;
-document.getElementsByTagName('head')[0].appendChild(frameworkScript) ;
-
-// Loading style.css
-var styleCSS	= document.createElement('link') ;
-styleCSS.setAttribute('href','skjapp-framework/css/style.css') ;
-styleCSS.setAttribute('type','text/css') ;
-styleCSS.setAttribute('rel','stylesheet') ;
-
-document.getElementsByTagName('head')[0].appendChild(styleCSS) ;
+function removeVideo()
+{
+	if(document.getElementById("videoContainer"))
+	{
+		canvasDiv.removeChild(document.getElementById("videoContainer")) ;
+	}
+}
 
 function createEngine()
-{
+{	
 	app = 'app' ;
 	
 	var title	= document.createElement('title') ;
@@ -81,8 +142,14 @@ function createEngine()
 	viewport.setAttribute("id","viewport") ;
 	viewport.setAttribute("content","width=" + data[app]["viewportWidth"] + ", height=" + data[app]["viewportHeight"] + ", user-scalable=" + data[app]["viewportResize"] + "") ;
 	document.getElementsByTagName('head')[0].appendChild(viewport) ;
+	
+	// NO NEED - Kamal
+	/*var defaultCSS	= document.createElement('style') ;
+	defaultCSS.innerHTML = 'canvas { margin-left : -8px ; margin-top : -8px ;}' ;
+	
+	document.head.appendChild(defaultCSS) ;*/
 
-	var scriptFiles = framework['coreFiles'] ;
+	var scriptFiles = data['engine']['pluginfiles'] ;
 	totalScripts = scriptFiles.length ;
 	
 	for(var i = 0; i < totalScripts; i++)
@@ -95,8 +162,8 @@ function createEngine()
 		document.getElementsByTagName('head')[0].appendChild(script) ;
 	}
 	
-	framework['keyDown']	['active']	= false ;
-	framework['mouseDown']	['active']	= false ;
+	engine['keyDown']	['active']	= false ;
+	engine['mouseDown']	['active']	= false ;
 }
 
 function scriptLoadCounter()
@@ -122,12 +189,12 @@ function deleteEngine()
 // Engine Console Code
 function showConsole()
 {
-	document.body.appendChild(consoleDiv) ;
+	// document.body.appendChild(consoleDiv) ;
 }
 
 function hideConsole()
 {
-	document.body.removeChild(consoleDiv) ;
+	// document.body.removeChild(consoleDiv) ;
 }
 
 /////////////////////////
@@ -273,19 +340,19 @@ function updateApp()
 		drawApp() ;
 	}
 	
-	if(framework['keyDown']['active'] == true)
+	if(engine['keyDown']['active'] == true)
 	{
-		framework['keyDown']['active']	= 'repeated' ;
+		engine['keyDown']['active']	= 'repeated' ;
 	}
 	
-	framework['keyPress']['key']	= undefined ;
-	framework['keyPress']['active']= false ;
+	engine['keyPress']['key']	= undefined ;
+	engine['keyPress']['active']= false ;
 	
-	framework['keyUp']['key']		= undefined ;
-	framework['keyUp']['active']	= false ;
+	engine['keyUp']['key']		= undefined ;
+	engine['keyUp']['active']	= false ;
 	
-	framework['touchLayer'] = undefined ;
-	framework['touchLayerPart'] = undefined ;
+	//engine['touchLayer'] = undefined ;
+	engine['touchLayerPart'] = undefined ;
 	
 	//consoleDiv.innerHTML = totalRes + ' ' + resLoaded ;
 }
@@ -403,7 +470,7 @@ function deleteApp()
 function createPage(page)
 {
 	var type = data[page]['type'] ;
-	framework[type]['createPage'](page) ;
+	engine[type]['createPage'](page) ;
 }
 
 // Sets the page given in the parameter as the current page in the app 
@@ -413,28 +480,28 @@ function getPage(page, state)
 	
 	data[page]['state'] = state ;
 
-	framework[type]['getPage'](page) ;
+	engine[type]['getPage'](page) ;
 }
 
 function updatePage(page)
 {	
 	var type = data[page]['type'] ;
-	
-	framework[type]['updatePage'](page) ;
+
+	engine[type]['updatePage'](page) ;
 }
 
 function drawPage(page)
 {
 	var type = data[page]['type'] ;
 	
-	framework[type]['drawPage'](page) ;
+	engine[type]['drawPage'](page) ;
 }
 
 function deletePage()
 {
 	var type = data[page]['type'] ;
 
-	framework[type]['deletePage'](page) ;
+	engine[type]['deletePage'](page) ;
 }
 
 // LAYER CODE
@@ -445,7 +512,7 @@ function createLayer(layer)
 		var type = data[layer]['type'] ;
 	
 		// Calling createLayer function in specific layer plugin
-		framework[type]['createLayer'](layer) ;
+		data['engine'][type]['createLayer'](layer) ;
 	
 		data[layer]['created'] = true ;
 	}
@@ -456,7 +523,7 @@ function getLayer(layer)
 	var type = data[layer]['type'] ;
 	
 	// Calling getLayer function in specific layer plugin
-	framework[type]['getLayer'](layer) ;
+	data['engine'][type]['getLayer'](layer) ;
 }
 
 function updateLayer(layer)
@@ -476,17 +543,17 @@ function updateLayer(layer)
 		
 		if(type == 'ui.layer.image.animation')
 		{
-			framework[type]['updateLayer'](layer) ;
+			data['engine'][type]['updateLayer'](layer) ;
 		}
 		else if(type == 'ui.layer.advanced.group')
 		{
-			framework[type]['updateLayer'](layer) ;
+			data['engine'][type]['updateLayer'](layer) ;
 		}
 	}
 		
 	if(type == 'ui.layer.text.html')
 	{
-		framework[type]['updateLayer'](layer) ;
+		data['engine'][type]['updateLayer'](layer) ;
 	}
 	else if(type == 'ui.layer.image.animation.array')
 	{
@@ -498,29 +565,29 @@ function updateLayer(layer)
 			}
 		}
 		
-		framework[type]['updateLayer'](layer) ;
+		data['engine'][type]['updateLayer'](layer) ;
 	}
 	else if(type == 'ui.layer.audio')
 	{
-		framework[type]['updateLayer'](layer) ;
+		data['engine'][type]['updateLayer'](layer) ;
 	}
 	else if(type == 'ui.layer.html.div')
 	{
-		framework[type]['updateLayer'](layer) ;
+		data['engine'][type]['updateLayer'](layer) ;
 	}
 	else if(type == 'ui.layer.html.button')
 	{
-		framework[type]['updateLayer'](layer) ;
+		data['engine'][type]['updateLayer'](layer) ;
 	}
 	else if(type == 'ui.layer.html.textbox')
 	{
-		framework[type]['updateLayer'](layer) ;
+		data['engine'][type]['updateLayer'](layer) ;
 	}
 	
 	// Blackberry
 	else if(type == 'device.blackberry10')
 	{
-		framework[type]['updateLayer'](layer) ;
+		data['engine'][type]['updateLayer'](layer) ;
 	}
 }
 
@@ -532,12 +599,12 @@ function drawLayer(layer)
 	// Calling drawLayer function in specific layer plugin
 	if(visible == true)
 	{
-		framework[type]['drawLayer'](layer) ;
+		data['engine'][type]['drawLayer'](layer) ;
 	}
 	
 	if(type == 'ui.layer.image.animation.array')
 	{
-		framework[type]['drawLayer'](layer) ;
+		data['engine'][type]['drawLayer'](layer) ;
 	}
 }
 
@@ -546,7 +613,7 @@ function deleteLayer(layer)
 	var type = data[layer]['type'] ;
 	
 	// Calling deleteLayer function in specific layer plugin
-	framework[type]['deleteLayer'](layer) ;
+	data['engine'][type]['deleteLayer'](layer) ;
 }
 
 // LAYER PART CODE
@@ -565,7 +632,7 @@ function deleteLayerPart()
 	
 }
 
-
+// Drag and Drop Implemented - Kamal
 // Choosing the touch layer
 function getTouchLayer(xx, yy)
 {
@@ -604,14 +671,14 @@ function getTouchLayer(xx, yy)
 			drag['midpoint']['x1'] = xx - drag['data']['x'] ;
 	    	drag['midpoint']['y1'] = yy - drag['data']['y'] ;
 			
-			framework['touchLayer'] = appCurrentPageLayers[i] ;
+			engine['touchLayer'] = appCurrentPageLayers[i] ;
 			
-			var layerType = data[framework['touchLayer']]['type'] ;
-			//alert('touchLayer ' + framework['touchLayer']) ;
+			var layerType = data[engine['touchLayer']]['type'] ;
+			//alert('touchLayer ' + engine['touchLayer']) ;
 			
 			if(layerType == 'ui.layer.advanced.group')
 			{
-				var layers = data[framework['touchLayer']]['layers'] ;
+				var layers = data[engine['touchLayer']]['layers'] ;
 				
 				for(var j = layers.length - 1; j >= 0; j--)
 				{
@@ -624,13 +691,13 @@ function getTouchLayer(xx, yy)
 					
 					if(visible == true && x < xx && x + width > xx && y < yy && y + height > yy)
 					{
-						framework['touchLayerPart'] = layers[j] ;
+						engine['touchLayerPart'] = layers[j] ;
 						//alert() ;
 						return ;
 					}
 				}
 			}
-			//consoleDiv.innerHTML = consoleDiv.innerHTML + ' ' + framework['touchLayer'] ; 
+			//consoleDiv.innerHTML = consoleDiv.innerHTML + ' ' + engine['touchLayer'] ; 
 			
 			return ;
 		}
@@ -638,71 +705,123 @@ function getTouchLayer(xx, yy)
 }
 
 // GESTURE
-
+function getSwipe(type)
+{
+	if(engine["touchLayer"] != undefined)
+	{
+		if(type == "mouse")
+		{
+			if(engine['mouseDown']['pageX'] != engine['mouseUp']['pageX'])
+			{
+				var radians = Math.atan2(engine['mouseUp']['pageY'] - engine['mouseDown']['pageY'] , engine['mouseUp']['pageX'] - engine['mouseDown']['pageX']) ;
+				var degree = (radians * 180 / Math.PI) ;
+				var direction ;
+				
+				if(degree >= -60 && degree <= 30)
+				{
+					direction = "right" ;
+				}
+				else if(degree < -130 && degree <= 180 || degree >= 130 && degree <= 180)
+				{
+					direction = "left" ;
+				}
+				else if(degree >= -120 && degree <= -60)
+				{
+					direction = "top" ;
+				}
+				else if(degree >= 30 && degree <= 160)
+				{
+					direction = "bottom" ;
+				}
+				
+				engine["gesture"]["swipe"] = 
+				{
+					"active" : true, 
+					"angle" : degree, 
+					"radians" : radians,
+					"direction" : direction
+				} ;
+			}
+		}
+		else
+		{
+			/*if(touchX != touchUpX)
+			{
+				var radians = Math.atan2(touchUpY - touchY , touchUpX - touchX) ;
+				var degree = (radians * 180 / Math.PI) + 90 ;
+				
+				touch["gesture"]["swipe"] = {"active" : true, "angle" : degree, "radians" : radians} ;
+			}*/
+		}
+	}
+}
 
 // MOUSE INPUT CODE
 function mouseClick(e)
 {
-	framework['mouseClick']['active']	= true ;
+	engine['mouseClick']['active']	= true ;
 	
-	framework['mouseClick']['screenX']	= e.screenX ;
-	framework['mouseClick']['screenX']	= e.screenY ;
+	engine['mouseClick']['screenX']	= e.screenX ;
+	engine['mouseClick']['screenX']	= e.screenY ;
 	
-	framework['mouseClick']['clientX']	= e.pageX ;
-	framework['mouseClick']['clientY']	= e.pageY ;
+	engine['mouseClick']['clientX']	= e.pageX ;
+	engine['mouseClick']['clientY']	= e.pageY ;
 	
-	framework['mouseClick']['ctrlKey']	= e.ctrlKey ;
-	framework['mouseClick']['shiftKey']= e.shiftKey ;
-	framework['mouseClick']['altKey']	= e.altKey ;
+	engine['mouseClick']['ctrlKey']	= e.ctrlKey ;
+	engine['mouseClick']['shiftKey']= e.shiftKey ;
+	engine['mouseClick']['altKey']	= e.altKey ;
 	
 	// button value 0 means LEFT MOUSE BUTTON
 	// button value 1 means MOUSE WHEEL BUTTON
 	// button value 2 means RIGHT MOUSE BUTTON
-	framework['mouseClick']['button']	= e.button ;
+	engine['mouseClick']['button']	= e.button ;
 	
 }
 
 function mouseDblClick(e)
 {
-	framework['mouseDblClick']['active']	= true ;
+	engine['mouseDblClick']['active']	= true ;
 	
-	framework['mouseDblClick']['screenX']	= e.screenX ;
-	framework['mouseDblClick']['screenX']	= e.screenY ;
+	engine['mouseDblClick']['screenX']	= e.screenX ;
+	engine['mouseDblClick']['screenX']	= e.screenY ;
 	
-	framework['mouseDblClick']['clientX']	= e.pageX ;
-	framework['mouseDblClick']['clientY']	= e.pageY ;
+	engine['mouseDblClick']['clientX']	= e.pageX ;
+	engine['mouseDblClick']['clientY']	= e.pageY ;
 	
-	framework['mouseDblClick']['ctrlKey']	= e.ctrlKey ;
-	framework['mouseDblClick']['shiftKey']	= e.shiftKey ;
-	framework['mouseDblClick']['altKey']	= e.altKey ;
+	engine['mouseDblClick']['ctrlKey']	= e.ctrlKey ;
+	engine['mouseDblClick']['shiftKey']	= e.shiftKey ;
+	engine['mouseDblClick']['altKey']	= e.altKey ;
 	
 	// button value 0 means LEFT MOUSE BUTTON
 	// button value 1 means MOUSE WHEEL BUTTON
 	// button value 2 means RIGHT MOUSE BUTTON
-	framework['mouseDblClick']['button']	= e.button ;
+	engine['mouseDblClick']['button']	= e.button ;
 	
 }
 
 function mouseDown(e)
 {
-	framework['mouseDown']['active']	= true ;
+	engine['mouseDown']['active']	= true ;
 	
-	framework['mouseDown']['screenX']	= e.screenX ;
-	framework['mouseDown']['screenX']	= e.screenY ;
+	engine['mouseDown']['screenX']	= e.screenX ;
+	engine['mouseDown']['screenX']	= e.screenY ;
 	
-	framework['mouseDown']['clientX']	= e.pageX ;
-	framework['mouseDown']['clientY']	= e.pageY ;
+	engine['mouseDown']['clientX']	= e.pageX ;
+	engine['mouseDown']['clientY']	= e.pageY ;
 	
-	framework['mouseDown']['ctrlKey']	= e.ctrlKey ;
-	framework['mouseDown']['shiftKey']	= e.shiftKey ;
-	framework['mouseDown']['altKey']	= e.altKey ;
+	engine['mouseDown']['pageX']	= e.pageX ;
+	engine['mouseDown']['pageY']	= e.pageY ;
+	
+	engine['mouseDown']['ctrlKey']	= e.ctrlKey ;
+	engine['mouseDown']['shiftKey']	= e.shiftKey ;
+	engine['mouseDown']['altKey']	= e.altKey ;
 	
 	// button value 0 means LEFT MOUSE BUTTON
 	// button value 1 means MOUSE WHEEL BUTTON
 	// button value 2 means RIGHT MOUSE BUTTON
-	framework['mouseDown']['button']	= e.button ;
+	engine['mouseDown']['button']	= e.button ;
 	
-	getTouchLayer(framework['mouseDown']['clientX'], framework['mouseDown']['clientY']) ;
+	getTouchLayer(engine['mouseDown']['pageX'], engine['mouseDown']['pageY']) ;
 }
 
 function mouseUp(e)
@@ -712,35 +831,40 @@ function mouseUp(e)
 	//alert(JSON.stringify(data['rect2'], undefined, 3)) ;
 	
 	// Clearing mouseDown values
-	framework['mouseDown']['active']	= false ;
+	engine['mouseDown']['active']	= false ;
 	
-	framework['mouseDown']['screenX']	= undefined ;
-	framework['mouseDown']['screenX']	= undefined ;
+	engine['mouseDown']['screenX']	= undefined ;
+	engine['mouseDown']['screenX']	= undefined ;
 	
-	framework['mouseDown']['clientX']	= undefined ;
-	framework['mouseDown']['clientY']	= undefined ;
+	engine['mouseDown']['clientX']	= undefined ;
+	engine['mouseDown']['clientY']	= undefined ;
 	
-	framework['mouseDown']['ctrlKey']	= undefined ;
-	framework['mouseDown']['shiftKey']	= undefined ;
-	framework['mouseDown']['altKey']	= undefined ;
+	engine['mouseDown']['ctrlKey']	= undefined ;
+	engine['mouseDown']['shiftKey']	= undefined ;
+	engine['mouseDown']['altKey']	= undefined ;
 	
-	framework['mouseDown']['button']	= undefined ;
+	engine['mouseDown']['button']	= undefined ;
 	
 	// mouseUp Values
-	framework['mouseUp']['screenX']	= e.screenX ;
-	framework['mouseUp']['screenX']	= e.screenY ;
+	engine['mouseUp']['screenX']	= e.screenX ;
+	engine['mouseUp']['screenX']	= e.screenY ;
 	
-	framework['mouseUp']['clientX']	= e.pageX ;
-	framework['mouseUp']['clientY']	= e.pageY ;
+	engine['mouseUp']['clientX']	= e.pageX ;
+	engine['mouseUp']['clientY']	= e.pageY ;
 	
-	framework['mouseUp']['ctrlKey']	= e.ctrlKey ;
-	framework['mouseUp']['shiftKey']	= e.shiftKey ;
-	framework['mouseUp']['altKey']	= e.altKey ;
+	engine['mouseUp']['pageX']		= e.pageX ;
+	engine['mouseUp']['pageY']		= e.pageY ;
+	
+	engine['mouseUp']['ctrlKey']	= e.ctrlKey ;
+	engine['mouseUp']['shiftKey']	= e.shiftKey ;
+	engine['mouseUp']['altKey']	= e.altKey ;
 	
 	// button value 0 means LEFT MOUSE BUTTON
 	// button value 1 means MOUSE WHEEL BUTTON
 	// button value 2 means RIGHT MOUSE BUTTON
-	framework['mouseUp']['button']	= e.button ;	
+	engine['mouseUp']['button']	= e.button ;	
+	
+	getSwipe("mouse") ;
 }
 
 function mouseMove(e)
@@ -751,17 +875,17 @@ function mouseMove(e)
 	  	drag['data']['y'] = e.pageY - drag['midpoint']['y1'] ;
 	}
 	
-	framework['mouseMove']['active']	= true ;
+	engine['mouseMove']['active']	= true ;
 	
-	framework['mouseMove']['screenX']	= e.screenX ;
-	framework['mouseMove']['screenX']	= e.screenY ;
+	engine['mouseMove']['screenX']	= e.screenX ;
+	engine['mouseMove']['screenX']	= e.screenY ;
 	
-	framework['mouseMove']['clientX']	= e.pageX ;
-	framework['mouseMove']['clientY']	= e.pageY ;
+	engine['mouseMove']['clientX']	= e.pageX ;
+	engine['mouseMove']['clientY']	= e.pageY ;
 	
-	framework['mouseMove']['ctrlKey']	= e.ctrlKey ;
-	framework['mouseMove']['shiftKey']	= e.shiftKey ;
-	framework['mouseMove']['altKey']	= e.altKey ;
+	engine['mouseMove']['ctrlKey']	= e.ctrlKey ;
+	engine['mouseMove']['shiftKey']	= e.shiftKey ;
+	engine['mouseMove']['altKey']	= e.altKey ;
 	
 	// button value 0 means LEFT MOUSE BUTTON
 	// button value 1 means MOUSE WHEEL BUTTON
@@ -770,43 +894,43 @@ function mouseMove(e)
 
 function mouseOver(e)
 {
-	framework['mouseOver']['active']	= true ;
+	engine['mouseOver']['active']	= true ;
 	
-	framework['mouseOver']['screenX']	= e.screenX ;
-	framework['mouseOver']['screenX']	= e.screenY ;
+	engine['mouseOver']['screenX']	= e.screenX ;
+	engine['mouseOver']['screenX']	= e.screenY ;
 	
-	framework['mouseOver']['clientX']	= e.pageX ;
-	framework['mouseOver']['clientY']	= e.pageY ;
+	engine['mouseOver']['clientX']	= e.pageX ;
+	engine['mouseOver']['clientY']	= e.pageY ;
 	
-	framework['mouseOver']['ctrlKey']	= e.ctrlKey ;
-	framework['mouseOver']['shiftKey']	= e.shiftKey ;
-	framework['mouseOver']['altKey']	= e.altKey ;
+	engine['mouseOver']['ctrlKey']	= e.ctrlKey ;
+	engine['mouseOver']['shiftKey']	= e.shiftKey ;
+	engine['mouseOver']['altKey']	= e.altKey ;
 	
 	// button value 0 means LEFT MOUSE BUTTON
 	// button value 1 means MOUSE WHEEL BUTTON
 	// button value 2 means RIGHT MOUSE BUTTON
-	framework['mouseOver']['button']	= e.button ;
+	engine['mouseOver']['button']	= e.button ;
 	
 }
 
 function mouseOut(e)
 {
-	framework['mouseOut']['active']	= true ;
+	engine['mouseOut']['active']	= true ;
 	
-	framework['mouseOut']['screenX']	= e.screenX ;
-	framework['mouseOut']['screenX']	= e.screenY ;
+	engine['mouseOut']['screenX']	= e.screenX ;
+	engine['mouseOut']['screenX']	= e.screenY ;
 	
-	framework['mouseOut']['clientX']	= e.pageX ;
-	framework['mouseOut']['clientY']	= e.pageY ;
+	engine['mouseOut']['clientX']	= e.pageX ;
+	engine['mouseOut']['clientY']	= e.pageY ;
 	
-	framework['mouseOut']['ctrlKey']	= e.ctrlKey ;
-	framework['mouseOut']['shiftKey']	= e.shiftKey ;
-	framework['mouseOut']['altKey']	= e.altKey ;
+	engine['mouseOut']['ctrlKey']	= e.ctrlKey ;
+	engine['mouseOut']['shiftKey']	= e.shiftKey ;
+	engine['mouseOut']['altKey']	= e.altKey ;
 	
 	// button value 0 means LEFT MOUSE BUTTON
 	// button value 1 means MOUSE WHEEL BUTTON
 	// button value 2 means RIGHT MOUSE BUTTON
-	framework['mouseOut']['button']	= e.button ;
+	engine['mouseOut']['button']	= e.button ;
 }
 
 window.onclick		= mouseClick ;
@@ -820,7 +944,7 @@ window.onmouseout	= mouseOut ;
 // KEY INPUT CODE
 function keyDown(e)
 {	
-	framework['keyDown']['active']	= true ;
+	engine['keyDown']['active']	= true ;
 	
 	var key = e.key ;
 	
@@ -829,12 +953,12 @@ function keyDown(e)
 		key = e.keyCode ;
 	}
 	
-	framework['keyDown']['key']	= key ;
+	engine['keyDown']['key']	= key ;
 }
 
 function keyPress(e)
 {
-	framework['keyPress']['active']	= true ;
+	engine['keyPress']['active']	= true ;
 	
 	var key = e.key ;
 	
@@ -843,13 +967,13 @@ function keyPress(e)
 		key = e.keyCode ;
 	}
 	
-	framework['keyPress']['key']	= key ;
+	engine['keyPress']['key']	= key ;
 	// consoleDiv.innerHTML = 'keyPress ' + e ;
 }
 
 function keyUp(e)
 {
-	framework['keyUp']['active']	= true ;
+	engine['keyUp']['active']	= true ;
 	
 	var key = e.key ;
 	
@@ -858,10 +982,10 @@ function keyUp(e)
 		key = e.keyCode ;
 	}
 	
-	framework['keyUp']['key']	= key ;
+	engine['keyUp']['key']	= key ;
 	
-	framework['keyDown']['key']	= undefined ;
-	framework['keyDown']['active']	= false ;
+	engine['keyDown']['key']	= undefined ;
+	engine['keyDown']['active']	= false ;
 }
 
 window.onkeydown	= keyDown ;
@@ -881,7 +1005,7 @@ function touchStart(event)
 	
 	var data = {"fingers" : 1, "data" : touchData} ;
 	
-	framework["gesture"]["tap"] = data ;
+	engine["gesture"]["tap"] = data ;
 	
 	getTouchLayer(event.touches[0].pageX, event.touches[0].pageY) ;
 	
@@ -1116,7 +1240,7 @@ function resourceLoaded()
 	
 	if(resLoaded == totalRes)
 	{
-		framework['resourcesLoaded'] = true ;
+		engine['resourcesLoaded'] = true ;
 	}
 }
 

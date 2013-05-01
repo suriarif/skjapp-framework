@@ -1,8 +1,4 @@
 /////////////////////////
-/////    SHAPES	    /////
-/////////////////////////
-
-/////////////////////////
 ///// SHAPE : LINE	/////
 /////////////////////////
 
@@ -19,6 +15,11 @@ effects["shake"] 	= {} ;
 effects["fold"] 	= {} ;
 effects["pulsate"] 	= {} ;
 effects["dropOut"] 	= {} ;
+
+var create_ui_layer_shape_line = function createUILayerShapeLine(layer)
+{
+	
+}
 
 var create_ui_layer_shape_line = function createUILayerShapeLine(layer)
 {
@@ -57,7 +58,7 @@ var delete_ui_layer_shape_line = function deleteUILayerShapeLine()
 }
 
 
-framework['ui.layer.shape.line'] = 
+data['engine']['ui.layer.shape.line'] = 
 {
 	'createLayer'	: create_ui_layer_shape_line 	,
 	'getLayer'		: get_ui_layer_shape_line		,
@@ -472,7 +473,7 @@ var delete_ui_layer_shape_rectangle = function deleteUILayerShapeRectangle()
 	
 }
 
-framework['ui.layer.shape.rectangle'] = 
+data['engine']['ui.layer.shape.rectangle'] = 
 {
 	'createLayer'	: create_ui_layer_shape_rectangle 	,
 	'getLayer'		: get_ui_layer_shape_rectangle		,
@@ -517,7 +518,7 @@ var delete_ui_layer_shape_square = function deleteUILayerShapeSquare()
 	
 }
 
-framework['ui.layer.shape.square'] = 
+data['engine']['ui.layer.shape.square'] = 
 {
 	'createLayer'	: create_ui_layer_shape_square 	,
 	'getLayer'		: get_ui_layer_shape_square		,
@@ -580,7 +581,7 @@ var delete_ui_layer_shape_roundedRect = function deleteUILayerShapeRoundedRect()
 	
 }
 
-framework['ui.layer.shape.roundedRect'] = 
+data['engine']['ui.layer.shape.roundedRect'] = 
 {
 	'createLayer'	: create_ui_layer_shape_roundedRect ,
 	'getLayer'		: get_ui_layer_shape_roundedRect	,
@@ -637,7 +638,7 @@ var delete_ui_layer_shape_triangle = function deleteUILayerShapeTriangle()
 	
 }
 
-framework['ui.layer.shape.triangle'] = 
+data['engine']['ui.layer.shape.triangle'] = 
 {
 	'createLayer'	: create_ui_layer_shape_triangle 	,
 	'getLayer'		: get_ui_layer_shape_triangle		,
@@ -692,7 +693,7 @@ var delete_ui_layer_shape_polygon = function deleteUILayerShapePolygon()
 	
 }
 
-framework['ui.layer.shape.polygon'] = 
+data['engine']['ui.layer.shape.polygon'] = 
 {
 	'createLayer'	: create_ui_layer_shape_polygon	,
 	'getLayer'		: get_ui_layer_shape_polygon	,
@@ -745,7 +746,7 @@ var delete_ui_layer_shape_arc = function deleteUILayerShapeArc()
 	
 }
 
-framework['ui.layer.shape.arc'] = 
+data['engine']['ui.layer.shape.arc'] = 
 {
 	'createLayer'	: create_ui_layer_shape_arc	,
 	'getLayer'		: get_ui_layer_shape_arc	,
@@ -799,7 +800,7 @@ var delete_ui_layer_shape_ellipticalArc = function deleteUILayerShapeArc()
 	
 }
 
-framework['ui.layer.shape.ellipticalArc'] = 
+data['engine']['ui.layer.shape.ellipticalArc'] = 
 {
 	'createLayer'	: create_ui_layer_shape_ellipticalArc	,
 	'getLayer'		: get_ui_layer_shape_ellipticalArc		,
@@ -847,7 +848,7 @@ var delete_ui_layer_shape_circle = function deleteUILayerShapeCircle()
 	
 }
 
-framework['ui.layer.shape.circle'] = 
+data['engine']['ui.layer.shape.circle'] = 
 {
 	'createLayer'	: create_ui_layer_shape_circle 	,
 	'getLayer'		: get_ui_layer_shape_circle 		,
@@ -902,7 +903,7 @@ var delete_ui_layer_shape_ellipse = function deleteUILayerShapeEllipse()
 	
 }
 
-framework['ui.layer.shape.ellipse '] = 
+data['engine']['ui.layer.shape.ellipse '] = 
 {
 	'createLayer'	: create_ui_layer_shape_ellipse 	,
 	'getLayer'		: get_ui_layer_shape_ellipse 		,
@@ -953,7 +954,7 @@ var delete_ui_layer_shape_quadraticCurve = function deleteUILayerShapeEllipse()
 	
 }
 
-framework['ui.layer.shape.quadraticCurve'] = 
+data['engine']['ui.layer.shape.quadraticCurve'] = 
 {
 	'createLayer'	: create_ui_layer_shape_quadraticCurve	,
 	'getLayer'		: get_ui_layer_shape_quadraticCurve		,
@@ -1008,7 +1009,7 @@ var delete_ui_layer_shape_bezierCurve = function deleteUILayerShapeBezierCurve()
 	
 }
 
-framework['ui.layer.shape.bezierCurve'] = 
+data['engine']['ui.layer.shape.bezierCurve'] = 
 {
 	'createLayer'	: create_ui_layer_shape_bezierCurve	,
 	'getLayer'		: get_ui_layer_shape_bezierCurve		,
@@ -1054,7 +1055,7 @@ var delete_ui_layer_shape_path = function deleteUILayerShapePath()
 	
 }
 
-framework['ui.layer.shape.path'] = 
+data['engine']['ui.layer.shape.path'] = 
 {
 	'createLayer'	: create_ui_layer_shape_path	,
 	'getLayer'		: get_ui_layer_shape_path		,
@@ -1062,995 +1063,3 @@ framework['ui.layer.shape.path'] =
 	'drawLayer'		: draw_ui_layer_shape_path		,	
 	'deleteLayer'	: delete_ui_layer_shape_path
 } ;
-
-// Images
-
-/////////////////////////
-/// IMAGE : DEFAULT	/////
-/////////////////////////
-
-var create_ui_layer_image = function createUILayerImage(layer)
-{
-	totalRes++ ;
-	
-	var src = data[layer]['src'] ;
-		
-	var img = new Image() ;
-	img.src = src ;
-	img.onload = resourceLoaded ;
-		
-	data[layer]['image'] = img ;
-	data[app]['images'].push(img) ;
-}
-
-var get_ui_layer_image = function getUILayerImage()
-{
-	alert('getUILayerImageFrame') ;
-}
-
-var update_ui_layer_image = function updateUILayerImage()
-{
-	alert('updateUILayerImageFrame') ;
-}
-
-var draw_ui_layer_image = function drawUILayerImage(layer)
-{
-	var image	= data[layer]['image'] ;
-	var x		= data[layer]['x'] ;
-	var y		= data[layer]['y'] ;
-	
-	data[layer]['width']	= image.width ;
-	data[layer]['height']	= image.height ;
-	
-	// Code for xShift and yShift
-	var xShift = data[layer]['xShift'] ;
-	var yShift = data[layer]['yShift'] ;
-	
-	var rotate  = data[layer]['rotate'] ;
-	
-	var rotateX	= data[layer]['rotateX'] ;
-	var rotateY	= data[layer]['rotateY'] ;
-		
-	ctx.save();
-	
-	if(rotate != undefined)
-	{
-		ctx.translate(x + rotateX, y + rotateY) ;
-		ctx.rotate(rotate * Math.PI / 180) ;
-	}
-	
-	if(xShift == undefined)
-	{
-		xShift = 0 ;
-	}
-	
-	if(yShift == undefined)
-	{
-		yShift = 0 ;
-	}
-		
-	if(image != undefined)
-	{
-		if(rotate != undefined)
-		{
-			ctx.strokeStyle = '#000' ;
-			ctx.strokeRect(x + xShift -rotateX, y + yShift -rotateY, 100, 100)
-			ctx.drawImage(image,x + xShift -rotateX,y + yShift -rotateY) ;
-		}
-		else
-		{
-			ctx.drawImage(image,x + xShift,y + yShift) ;
-		}
-	}
-	
-	ctx.restore() ;
-}
-
-var delete_ui_layer_image = function deleteUILayerImage()
-{
-	alert('deleteUILayerImageFrame') ;
-}
-
-
-framework['ui.layer.image'] = 
-{
-	'createLayer'	: create_ui_layer_image 	,
-	'getLayer'		: get_ui_layer_image		,
-	'updateLayer'	: update_ui_layer_image		,
-	'drawLayer'		: draw_ui_layer_image		,
-	'deleteLayer'	: delete_ui_layer_image
-} ;
-
-
-/////////////////////////
-/// IMAGE : FRAME	/////
-/////////////////////////
-
-var create_ui_layer_image_frame = function createUILayerImageFrame(layer)
-{
-	src = data[layer]['src'] ;
-		
-	var img = new Image() ;
-	img.src = src ;
-		
-	data[layer]['image'] = img ;
-	data[app]['images'].push(img) ;
-} ;
-
-var get_ui_layer_image_frame = function getUILayerImageFrame()
-{
-	alert('getUILayerImageFrame') ;
-}
-
-var update_ui_layer_image_frame = function updateUILayerImageFrame()
-{
-	alert('updateUILayerImageFrame') ;
-}
-
-var draw_ui_layer_image_frame = function drawUILayerImageFrame(layer)
-{
-	var image		= data[layer]['image'] ;
-		
-	var framesArray = data[layer]['frames'];
-	var currentFrame= data[layer]['currentFrame'];
-
-	var x		= data[layer]['x'] ;
-	var y		= data[layer]['y'] ;
-	var xOffset = framesArray[currentFrame]['xOffset'];
-	var yOffset = framesArray[currentFrame]['yOffset'];
-	var w = framesArray[currentFrame]['width'];
-	var h = framesArray[currentFrame]['height'];
-	
-	data[layer]['width']	= w ;
-	data[layer]['height']	= h ;
-	
-	// Code for xShift and yShift
-	var xShift = data[layer]['xShift'] ;
-	var yShift = data[layer]['yShift'] ;
-	
-	if(xShift == undefined)
-	{
-		xShift = 0 ;
-	}
-	
-	if(yShift == undefined)
-	{
-		yShift = 0 ;
-	}
-
-	if (image != undefined)
-	{
-		ctx.drawImage(image, xOffset, yOffset, w, h, x + xShift, y + yShift, w, h);
-	}
-}
-
-var delete_ui_layer_image_frame = function deleteUILayerImageFrame()
-{
-	alert('deleteUILayerImageFrame') ;
-}
-
-
-framework['ui.layer.image.frame'] = 
-{
-	'createLayer'	: create_ui_layer_image_frame 	,
-	'getLayer'		: get_ui_layer_image_frame		,
-	'updateLayer'	: update_ui_layer_image_frame	,
-	'drawLayer'		: draw_ui_layer_image_frame		,
-	'deleteLayer'	: delete_ui_layer_image_frame
-} ;
-
-
-/////////////////////////
-///IMAGE : ANIMATION/////
-/////////////////////////
-
-var create_ui_layer_image_animation = function createUILayerImageAnimation(layer)
-{
-	src = data[layer]['src'] ;
-		
-	var img = new Image() ;
-	img.src = src ;
-		
-	data[layer]['image'] = img ;
-	data[app]['images'].push(img) ;
-		
-	data[layer]['animationIndex'] = 0 ;
-	data[layer]['startTime']	= undefined ;
-	
-	data[layer]['oldState']		= undefined ;
-} ;
-
-var get_ui_layer_image_animation = function getUILayerImageAnimation()
-{
-	
-} ;
-
-var update_ui_layer_image_animation = function updateUILayerImageAnimation(layer)
-{	
-	if(data[layer]['state'] != data[layer]['oldState'])
-	{
-		data[layer]['animationIndex']	= 0;
-		data[layer]['startTime']		= undefined ;
-		data[layer]['frameStartTime']	= undefined ;
-		
-		data[layer]['oldState'] = data[layer]['state'] ;
-	}
-	
-	if(data[layer]['startTime'] == undefined)
-	{
-		data[layer]['startTime'] = date.getTime() ;
-		
-		data[layer]['frameStartTime'] = date.getTime() ;
-		data[layer]['frameTime'] = 0 ;
-	}
-	
-	var state		= data[layer]['state'];
-	var animation	= data[layer]['animation'];
-	var sequence	= animation[state];
-	
-	var animationIndex = data[layer]['animationIndex'] ;
-	var frameInterval = sequence[animationIndex]['time'];
-	var dx = sequence[animationIndex]['dx'];
-	var dy = sequence[animationIndex]['dy'];
-	
-	if(data[layer]['frameTime'] >= frameInterval)
-	{
-		if (animationIndex < ((sequence.length) - 1))
-		{
-			data[layer]['animationIndex']++;
-			
-			data[layer]['frameStartTime'] = date.getTime() ;
-			data[layer]['frameTime'] = 0 ;
-		}
-		else
-		{
-			data[layer]['animationIndex'] = 0;
-			data[layer]['startTime'] = undefined ;
-		}
-		
-		data[layer]['x'] += dx;
-		data[layer]['y'] += dy;
-	}
-	
-	//consoleDiv.innerHTML = layer + ' 2';
-} ;
- 
-var draw_ui_layer_image_animation = function drawUILayerImageAnimation(layer)
-{	
-	data[layer]['time'] = date.getTime() - data[layer]['startTime'] ;
-		
-	var state		= data[layer]['state'];
-	var animation	= data[layer]['animation'];
-	var sequence	= animation[state];
-	var animationIndex = data[layer]['animationIndex'] ;
-
-	var image = data[layer]['image'];
-	var framesArray = data[layer]['frames'];
-	var currentFrame = sequence[animationIndex]['frame'];
-	var frameInterval = sequence[animationIndex]['time'];
-
-	var x		= data[layer]['x'] ;
-	var y		= data[layer]['y'] ;
-	var dx = sequence[animationIndex]['dx'];
-	var dy = sequence[animationIndex]['dy'];
-
-	var xOffset = framesArray[currentFrame]['xOffset'];
-	var yOffset = framesArray[currentFrame]['yOffset'];
-	var w = framesArray[currentFrame]['width'];
-	var h = framesArray[currentFrame]['height'];
-	
-	data[layer]['width']	= w ;
-	data[layer]['height']	= h ;
-
-	// Code for xShift and yShift
-	var xShift = data[layer]['xShift'] ;
-	var yShift = data[layer]['yShift'] ;
-	
-	if(xShift == undefined)
-	{
-		xShift = 0 ;
-	}
-	
-	if(yShift == undefined)
-	{
-		yShift = 0 ;
-	}
-
-	if (image != undefined)
-	{
-		ctx.drawImage(image, xOffset, yOffset, w, h, x + xShift, y + yShift, w, h);
-	}
-
-	data[layer]['frameTime'] = date.getTime() - data[layer]['frameStartTime'] ;
-} ;
-
-var delete_ui_layer_image_animation = function deleteUILayerImageAnimation()
-{
-	alert('deleteUILayerImageAnimation') ;
-} ;
-
-
-framework['ui.layer.image.animation'] = 
-{
-	'createLayer'	: create_ui_layer_image_animation 	,
-	'getLayer'		: get_ui_layer_image_animation		,
-	'updateLayer'	: update_ui_layer_image_animation	,
-	'drawLayer'		: draw_ui_layer_image_animation		,
-	'deleteLayer'	: delete_ui_layer_image_animation
-} ;
-
-////////////////////////////////
-/// IMAGE : ANIMATION ARRAY  ///
-////////////////////////////////
-
-var create_ui_layer_image_animation_array = function createUILayerImageAnimationArray(layer)
-{
-	src = data[layer]['src'] ;
-		
-	var img = new Image() ;
-	img.src = src ;
-		
-	data[layer]['image'] = img ;
-	data[app]['images'].push(img) ;
-		
-	var size = data[layer]['size'] ;
-		
-	data[layer]['animationIndex']	= new Array() ;
-	data[layer]['time']				= new Array() ;
-	data[layer]['frameTime']		= new Array() ;
-	data[layer]['startTime']		= new Array() ;
-	data[layer]['frameStartTime']	= new Array() ;
-	data[layer]['state']			= new Array() ;
-	data[layer]['oldState']			= new Array() ;
-	data[layer]['visible']			= new Array() ;
-	
-	data[layer]['x']				= new Array() ;
-	data[layer]['y']				= new Array() ;
-	data[layer]['width']			= new Array() ;
-	data[layer]['height']			= new Array() ;
-		
-	for(var i = 0; i < size; i++)
-	{	
-		data[layer]['animationIndex'][i]= 0 ;
-		data[layer]['startTime'][i]		= undefined ;
-		data[layer]['state'][i]			= undefined ;
-		data[layer]['oldState'][i]		= '' ;
-		
-		// Setting all parts of array to default visible value of false
-		data[layer]['visible'][i]		= false ;
-		
-		data[layer]['x']		[i]		= 200 ;
-		data[layer]['y']		[i]		= 20 ;
-		data[layer]['width']	[i]		= 0 ;
-		data[layer]['height']	[i]		= 0 ;
-	}
-}
-
-var get_ui_layer_image_animation_array = function getUILayerImageAnimationArray()
-{
-	
-}
-
-var update_ui_layer_image_animation_array = function updateUILayerImageAnimationArray(layer)
-{
-	var size = data[layer]['size'] ;
-	
-	for(var i = 0; i < size; i++)
-	{
-		// In case of change of state for animated layer
-		if(data[layer]['state'][i] != data[layer]['oldState'][i])
-		{
-			data[layer]['animationIndex']	[i]	= 0;
-			data[layer]['startTime']		[i]	= undefined ;
-			data[layer]['frameStartTime']	[i]	= undefined ;
-				
-			data[layer]['oldState']			[i] = data[layer]['state'][i] ;
-		}
-		
-		var visible = data[layer]['visible'][i] ;
-
-		if(visible == true)
-		{	
-			// Resetting variables during the start of a sequence animation 
-			if(data[layer]['startTime'][i] == undefined)
-			{
-				data[layer]['startTime']		[i] = date.getTime() ;
-				
-				data[layer]['frameStartTime']	[i] = date.getTime() ;
-				data[layer]['frameTime']		[i] = 0 ;
-			}
-			
-			var state		= data[layer]['state'][i]	;
-			
-			if(state == undefined)
-			{
-				continue ;
-			}
-			
-			var animation	= data[layer]['animation'] 	;
-			var sequence	= animation[state]			;
-			
-			var animationIndex	= data[layer]['animationIndex'][i] ;
-			var frameInterval	= sequence[animationIndex]['time'] ;
-			var dx 				= sequence[animationIndex]['dx'];
-			var dy				= sequence[animationIndex]['dy'];
-			
-			// alert(data[layer]['frameTime'][i] + ' ' + frameInterval) ;
-			
-			if(data[layer]['frameTime'][i] >= frameInterval)
-			{
-				if (animationIndex < ((sequence.length) - 1))
-				{
-					data[layer]['animationIndex'][i]++;
-					
-					data[layer]['frameStartTime']	[i] = date.getTime() ;
-					data[layer]['frameTime']		[i] = 0 ;
-				}
-				else
-				{
-					data[layer]['animationIndex']	[i] = 0;
-					data[layer]['startTime']		[i] = undefined ;
-				}
-				
-				data[layer]['x'][i] += dx;
-				data[layer]['y'][i] += dy;
-			}
-		}
-	}
-	
-	//alert(layer + ' update 2') ;
-}
-
-var draw_ui_layer_image_animation_array = function drawUILayerImageAnimationArray(layer)
-{	
-	//alert(layer + ' draw 1') ;
-	var size = data[layer]['size'] ;
-	
-	for(var i = 0; i < size; i++)
-	{
-		var visible = data[layer]['visible'][i] ;
-		
-		if(visible == true)
-		{
-			data[layer]['time'][i] = date.getTime() - data[layer]['startTime'][i] ;
-		
-			var state		= data[layer]['state']		[i];
-			
-			if(state == undefined)
-			{
-				continue ;
-			}
-			
-			var animation	= data[layer]['animation'] ;
-			var sequence	= animation[state]	;
-			var animationIndex = data[layer]['animationIndex'][i] ;//alert(layer + ' draw 3') ;
-		
-			var image		= data[layer]['image'];
-			var framesArray = data[layer]['frames'];
-			var currentFrame= sequence[animationIndex]['frame'];
-			var frameInterval = sequence[animationIndex]['time'];//alert(layer + ' draw 4') ;
-		
-			var x		= data[layer]['x'][i] ;
-			var y		= data[layer]['y'][i] ;
-			var dx = sequence[animationIndex]['dx'];
-			var dy = sequence[animationIndex]['dy'];//alert(layer + ' draw 5') ;
-		
-			var xOffset = framesArray[currentFrame]['xOffset'];
-			var yOffset = framesArray[currentFrame]['yOffset'];
-			var w 		= framesArray[currentFrame]['width'];
-			var h 		= framesArray[currentFrame]['height'];//alert(layer + ' draw 6') ;
-			
-			data[layer]['width']	[i]	= w ;
-			data[layer]['height']	[i]	= h ;
-		
-			if (image != undefined)
-			{
-				//consoleDiv.innerHTML = i + ' x ' + x + ' y ' + y + ' w ' + w + ' h ' + h + ' xOffset ' + xOffset + ' yOffset ' + yOffset ;
-				//alert(i) ;
-				ctx.drawImage(image, xOffset, yOffset, w, h, x, y, w, h);
-			}
-		
-			data[layer]['frameTime'][i] = date.getTime() - data[layer]['frameStartTime'][i] ;
-		}
-	}
-	//alert(layer + ' draw 2') ;
-}
-
-var delete_ui_layer_image_animation_array = function deleteUILayerImageAnimationArray()
-{
-	alert('deleteUILayerImageAnimation') ;
-}
-
-framework['ui.layer.image.animation.array'] = 
-{
-	'createLayer'	: create_ui_layer_image_animation_array 	,
-	'getLayer'		: get_ui_layer_image_animation_array		,
-	'updateLayer'	: update_ui_layer_image_animation_array	,
-	'drawLayer'		: draw_ui_layer_image_animation_array		,
-	'deleteLayer'	: delete_ui_layer_image_animation_array
-} ;
-
-/////////////////////////
-//// LAYER : CUSTOM	/////
-/////////////////////////
-
-var create_ui_layer_advanced_custom = function createUILayerAdvancedCustom(layer)
-{
-	
-} ;
-
-var get_ui_layer_advanced_custom = function getUILayerAdvancedCustom(layer)
-{
-	
-} ;
-
-var update_ui_layer_advanced_custom = function updateUILayerAdvancedCustom(layer)
-{
-	
-} ;
-
-var draw_ui_layer_advanced_custom = function drawUILayerAdvancedCustom(layer)
-{
-	var x		= data[layer]['x'] ;
-	var y		= data[layer]['y'] ;
-} ;
-
-var delete_ui_layer_advanced_custom = function deleteUILayerAdvancedCustom(layer)
-{
-	
-} ;
-
-
-framework['ui.layer.advanced.custom'] = 
-{
-	'createLayer'	: create_ui_layer_advanced_custom 	,
-	'getLayer'		: get_ui_layer_advanced_custom		,
-	'updateLayer'	: update_ui_layer_advanced_custom	,
-	'drawLayer'		: draw_ui_layer_advanced_custom		,
-	'deleteLayer'	: delete_ui_layer_advanced_custom
-} ;
-
-/////////////////////////
-///  LAYER : GROUP	/////
-/////////////////////////
-
-var create_ui_layer_advanced_group = function createUILayerAdvancedGroup(layer)
-{	
-	var x		= data[layer]['x'] ;
-	var y		= data[layer]['y'] ;
-	
-	var layers = data[layer]['layers'] ;
-	
-	for(var i = 0; i < layers.length;i++)
-	{	
-		createLayer(layers[i]) ;
-	}
-} ;
-
-var get_ui_layer_advanced_group = function getUILayerAdvancedGroup(layer)
-{
-	
-} ;
-
-var update_ui_layer_advanced_group = function updateUILayerAdvancedGroup(layer)
-{	
-	//consoleDiv.innerHTML = layer ;
-	var layers = data[layer]['layers'] ;
-	
-	for(var i = 0; i < layers.length;i++)
-	{
-		updateLayer(layers[i]) ;
-	}
-} ;
-
-var draw_ui_layer_advanced_group = function drawUILayerAdvancedGroup(layer)
-{
-	var visible = data[layer]['visible'] ;
-		
-	var layers = data[layer]['layers'] ;
-	
-	for(var i = 0; i < layers.length;i++)
-	{
-		data[layers[i]]['visible'] = visible ;
-		
-		data[layers[i]]['xShift'] = data[layer]['x'] ;
-		data[layers[i]]['yShift'] = data[layer]['y'] ;
-		
-		drawLayer(layers[i]) ;
-		
-		//consoleDiv.innerHTML = layer + ' ' + layers[i] ;
-	}
-} ;
-
-var delete_ui_layer_advanced_group = function deleteUILayerAdvancedGroup(layer)
-{
-	
-} ;
-
-framework['ui.layer.advanced.group'] = 
-{
-	'createLayer'	: create_ui_layer_advanced_group 	,
-	'getLayer'		: get_ui_layer_advanced_group		,
-	'updateLayer'	: update_ui_layer_advanced_group	,
-	'drawLayer'		: draw_ui_layer_advanced_group		,
-	'deleteLayer'	: delete_ui_layer_advanced_group
-} ;
-
-/////////////////////////
-///// AUDIO : BASIC	/////
-/////////////////////////
-
-var create_ui_layer_audio = function createUILayerAudio(layer)
-{
-	var audio	= document.createElement('audio') ;
-	
-	var sourceSize = data[layer]['src'].length ;
-	
-	for(var i = 0; i < sourceSize; i++)
-	{
-		var source		= document.createElement('source') ;
-	
-		var sourceSrc	= data[layer]['src'][i] ;
-		source.setAttribute('src' ,sourceSrc) ;
-		
-		var sourceType	= data[layer]['srcType'][i] ;
-		source.setAttribute('type' ,sourceType) ;
-		
-		audio.appendChild(source) ;
-	}
-	
-	audio.setAttribute('preload' ,"auto") ;
-	document.body.appendChild(audio) ;
-	
-	data[layer]['audio'] = audio ;
-} ;
-
-var get_ui_layer_audio = function getUILayerAudio(layer)
-{
-	var ds = document.createElement("div") ;
-	ds.setAttribute("id", "") ;
-} ;
-
-var update_ui_layer_audio = function updateUILayerAudio(layer)
-{
-	var audio = data[layer]['audio'] ;
-	var source= data[layer]['src'] ;
-	var state = data[layer]['state'] ;
-	
-	if(state == 'play' && audio != undefined)
-	{
-		var sound = new Audio(source) ;
-		sound.play() ;
-		
-		data[layer]['state'] = undefined ;
-	}
-} ;
-
-var draw_ui_layer_audio = function drawUILayerAudio(layer)
-{
-	
-} ;
-
-var delete_ui_layer_audio = function deleteUILayerAudio(layer)
-{
-	
-} ;
-
-framework['ui.layer.audio'] = 
-{
-	'createLayer'	: create_ui_layer_audio 	,
-	'getLayer'		: get_ui_layer_audio		,
-	'updateLayer'	: update_ui_layer_audio		,
-	'drawLayer'		: draw_ui_layer_audio		,
-	'deleteLayer'	: delete_ui_layer_audio
-} ;
-
-// HTML Controls
-
-// HTML Controls
-
-// DIV
-var create_ui_layer_html_div = function createUILayerHTMLDIV(layer)
-{
-	var div = document.createElement('div') ;
-	div.setAttribute('id',data[layer]['id']) ;
-	div.setAttribute('style','position : absolute; left: ' + data[layer]['x'] + 'px;top:' + data[layer]['y'] + 'px;') ;
-	div.setAttribute('class',data[layer]['class']) ;
-	div.innerHTML = data[layer]['text'] ;
-	
-	document.body.appendChild(div) ;
-}
-
-var get_ui_layer_html_div = function getUILayerHTMLDIV()
-{
-	
-}
-
-var update_ui_layer_html_div = function updateUILayerHTMLDIV(layer)
-{
-	
-}
-
-var draw_ui_layer_html_div = function drawUILayerHTMLDIV(layer)
-{
-	
-}
-
-framework['ui.layer.html.div'] = 
-{
-	'createLayer' : create_ui_layer_html_div ,
-	'getLayer'	  : get_ui_layer_html_div	 ,
-	'updateLayer' : update_ui_layer_html_div ,
-	'drawLayer'	  : draw_ui_layer_html_div
-} ;
-
-// Button
-var create_ui_layer_html_button = function createUILayerHTMLButton(layer)
-{
-	var button = document.createElement('input') ;
-	button.setAttribute('type','button') ;
-	button.setAttribute('id',data[layer]['id']) ;
-	button.setAttribute('style','position : absolute; left: ' + data[layer]['x'] + 'px;top:' + data[layer]['y'] + 'px;') ;
-	button.setAttribute('class',data[layer]['class']) ;
-	button.setAttribute('value',data[layer]['text']) ;
-	
-	document.body.appendChild(button) ;
-}
-
-var get_ui_layer_html_button = function getUILayerHTMLButton()
-{
-	
-}
-
-var update_ui_layer_html_button = function updateUILayerHTMLButton(layer)
-{
-	
-}
-
-var draw_ui_layer_html_button = function drawUILayerHTMLButton(layer)
-{
-	
-}
-
-framework['ui.layer.html.button'] = 
-{
-	'createLayer' : create_ui_layer_html_button ,
-	'getLayer'	  : get_ui_layer_html_button	,
-	'updateLayer' : update_ui_layer_html_button ,
-	'drawLayer'	  : draw_ui_layer_html_button
-} ;
-
-// TextBox
-var create_ui_layer_html_textbox = function createUILayerHTMLTextBox(layer)
-{
-	var textbox = document.createElement('input') ;
-	textbox.setAttribute('type','textbox') ;
-	textbox.setAttribute('id',data[layer]['id']) ;
-	textbox.setAttribute('style','position : absolute; left: ' + data[layer]['x'] + 'px;top:' + data[layer]['y'] + 'px;') ;
-	textbox.setAttribute('class',data[layer]['class']) ;
-	textbox.setAttribute('value',data[layer]['text']) ;
-	
-	document.body.appendChild(textbox) ;
-}
-
-var get_ui_layer_html_textbox = function getUILayerHTMLTextBox()
-{
-	
-}
-
-var update_ui_layer_html_textbox = function updateUILayerHTMLTextBox(layer)
-{
-	
-}
-
-var draw_ui_layer_html_textbox = function drawUILayerHTMLTextBox(layer)
-{
-	
-}
-
-framework['ui.layer.html.textbox'] = 
-{
-	'createLayer' : create_ui_layer_html_textbox ,
-	'getLayer'	  : get_ui_layer_html_textbox	,
-	'updateLayer' : update_ui_layer_html_textbox ,
-	'drawLayer'	  : draw_ui_layer_html_textbox
-} ;
-
-// Checkbox
-
-// Text
-
-/////////////////////////
-/////TEXT : DEFAULT	/////
-/////////////////////////
-
-var create_ui_layer_text = function createUILayerText(layer)
-{
-	
-}
-
-var get_ui_layer_text = function getUILayerText()
-{
-	
-}
-
-var update_ui_layer_text = function updateUILayerText()
-{
-	
-}
-
-var draw_ui_layer_text = function drawUILayerText(layer)
-{
-	var text	= data[layer]['text'] ;
-	var x		= data[layer]['x'] ;
-	var y		= data[layer]['y'] ;
-	
-	var rgb		= data[layer]['rgb'] ;
-	
-	// alert(rgb) ;
-	
-	if(rgb != undefined)
-	{
-		ctx.fillStyle = 'rgb(' + rgb[0] + ',' + rgb[1] + ',' + rgb[2] + ')' ;
-	}
-	
-	var font	= data[layer]['font'] ;
-	if(font != undefined)
-	{
-		ctx.font = font ;
-	}
-	
-	ctx.textBaseline = 'top' ;
-	
-	if(ctx.measureText(text).width != undefined)
-	{
-		data[layer]['width'] = ctx.measureText(text).width ;
-	}
-	
-	// Code for xShift and yShift
-	var xShift = data[layer]['xShift'] ;
-	var yShift = data[layer]['yShift'] ;
-	
-	if(xShift == undefined)
-	{
-		xShift = 0 ;
-	}
-	
-	if(yShift == undefined)
-	{
-		yShift = 0 ;
-	}
-	
-	ctx.fillText(text,x + xShift,y + yShift) ;
-	ctx.fillStyle = 'rgb(0,0,0)' ;
-}
-
-var delete_ui_layer_text = function deleteUILayerText()
-{
-	
-}
-
-
-framework['ui.layer.text'] = 
-{
-	'createLayer'	: create_ui_layer_text 	,
-	'getLayer'		: get_ui_layer_text		,
-	'updateLayer'	: update_ui_layer_text	,
-	'drawLayer'		: draw_ui_layer_text	,
-	'deleteLayer'	: delete_ui_layer_text
-} ;
-
-
-/////////////////////////
-///   TEXT : CSS	/////
-/////////////////////////
-
-var create_ui_layer_text_css = function createUILayerTextCSS(layer)
-{
-	var x		= data[layer]['x'] ;
-	var y		= data[layer]['y'] ;
-	var width	= data[layer]['width'] ;
-	var height	= data[layer]['height'] ;
-	
-	var text	= data[layer]['text'] ;
-	var color	= data[layer]['color'] ;
-	var font	= data[layer]['font'] ;
-	
-	var div1				= document.createElement('div') ;
-	div1.style.position		= 'absolute' ;
-	
-	div1.innerHTML			= text ;
-	div1.style.left			= x + 'px' ;
-	div1.style.top			= y + 'px';
-	div1.style.width		= width + 'px' ;
-	div1.style.height		= height + 'px' ;
-	div1.style.color		= color ;
-	div1.style.font			= font ;
-	
-	// div1.style.backgroundColor = 'red' ;
-	
-	var visible	= data[layer]['visible'] ;
-	
-	if(visible == true)
-	{
-		document.body.appendChild(div1) ;
-	}
-	
-	data[layer]['div']		= div1 ;
-}
-
-var get_ui_layer_text_css = function getUILayerTextCSS()
-{
-	
-}
-
-var update_ui_layer_text_css = function updateUILayerTextCSS(layer)
-{
-	var visible = data[layer]['visible'] ;
-	
-	var div1 = data[layer]['div'] ;
-	
-	if(visible == true)
-	{
-		document.body.appendChild(div1) ;
-	}
-	else
-	{
-		document.body.removeChild(div1) ;
-	}
-}
-
-var draw_ui_layer_text_css = function drawUILayerTextCSS(layer)
-{	
-	var x		= data[layer]['x'] ;
-	var y		= data[layer]['y'] ;
-	var width	= data[layer]['width'] ;
-	var height	= data[layer]['height'] ;
-	
-	var text	= data[layer]['text'] ;
-	var color	= data[layer]['color'] ;
-	var font	= data[layer]['font'] ;
-	
-	var div1				= data[layer]['div'] ;
-	
-	// Code for xShift and yShift
-	var xShift = data[layer]['xShift'] ;
-	var yShift = data[layer]['yShift'] ;
-	
-	if(xShift == undefined)
-	{
-		xShift = 0 ;
-	}
-	
-	if(yShift == undefined)
-	{
-		yShift = 0 ;
-	}
-	
-	div1.innerHTML			= text ;
-	div1.style.left			= (x + xShift) + 'px';
-	div1.style.top			= (y + yShift) + 'px';
-	div1.style.width		= width + 'px' ;
-	div1.style.height		= height + 'px' ;
-	div1.style.color		= color ;
-	div1.style.font			= font ;
-}
-
-var delete_ui_layer_text_css = function deleteUILayerTextCSS()
-{
-	
-}
-
-
-framework['ui.layer.text.html'] = 
-{
-	'createLayer'	: create_ui_layer_text_css 	,
-	'getLayer'	 	: get_ui_layer_text_css		,
-	'updateLayer'	: update_ui_layer_text_css	,
-	'drawLayer'	 	: draw_ui_layer_text_css	,
-	'deleteLayer'	: delete_ui_layer_text_css
-} ;
-
-// Video
-
-

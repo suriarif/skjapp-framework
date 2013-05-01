@@ -36,12 +36,9 @@ var get_ui_page = function getUIPage(page)
 
 var update_ui_page = function updateUIPage(page)
 {
-	if(code[page] != undefined && code[page]['update'] != undefined)
-	{
-		code[page]['update']() ;
-	}
+	code[page]['update']() ;
 	
-	// Getting Layers and updating them
+	// Getting Layers and drawing them
 	var layers = data[page]['layers'] ;
 
 	for(var i = 0; i < layers.length;i++)
@@ -68,7 +65,7 @@ var delete_ui_page = function deleteUIPage(page)
 	alert('deleteUIPage') ;
 } ;
 
-framework['ui.page'] = 
+engine['ui.page'] = 
 {
 	'createPage'	: create_ui_page 	,
 	'getPage'		: get_ui_page		,
@@ -132,11 +129,8 @@ var get_ui_page_advanced = function getUIPageAdvanced(page)
 } ;
 
 var update_ui_page_advanced = function updateUIPageAdvanced(page)
-{
-	if(code[page] != undefined && code[page]['update'] != undefined)
-	{		
-		code[page]['update']() ;
-	}
+{			
+	code[page]['update']() ;
 	
 	var state = data[page]['state'] ;
 	
@@ -204,7 +198,7 @@ var delete_ui_page_advanced = function deleteUIPageAdvanced(page)
 	alert('deleteUIPageAdvanced') ;
 } ;
 
-framework['ui.page.advanced'] = 
+engine['ui.page.advanced'] = 
 {
 	'createPage'	: create_ui_page_advanced 	,
 	'getPage'		: get_ui_page_advanced		,
